@@ -1,10 +1,14 @@
-const errorHandler = (error, req, res, next) => {
-  let statusCode = error.status || 500;
-
-  return res.status(statusCode).json({
-    status: false,
-    message: error.message || "Internal server error",
-  });
+const globalErrorHandler = async function (err, req, res, next) {
+  err.message = err.message || "Internal server error";
+  err.statusCode = err.statusCode || 500;
+  res.status(err.statusCode).json({ error: err.message });
 };
 
-export default errorHandler;
+class ErrorHandler extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
+
+export { ErrorHandler, globalErrorHandler };
