@@ -1,16 +1,13 @@
-import mongoose from "mongoose";
+import { MongoClient } from "mongodb";
 import configVariable from "./config.js";
 
-const connectDatabase = async () => {
-  try {
-    const connect = await mongoose.connect(configVariable.databaseUrl);
-    console.log(
-      `Database connected successfully at ${connect.connection.port}`
-    );
-  } catch (error) {
-    console.error("Failed to connect to the database", error);
-    process.exit(1);
-  }
-};
+async function getCollection() {
+  const client = await MongoClient.connect(configVariable.databaseUrl);
+  const db = client.db(configVariable.dbName);
+  return {
+    client,
+    collection: db.collection(configVariable.collectionName),
+  };
+}
 
-export default connectDatabase;
+export default getCollection;
