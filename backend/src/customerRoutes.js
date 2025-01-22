@@ -56,8 +56,12 @@ customerRouter.get(
       const skip = (page - 1) * limit;
 
       const cacheKey = generateCacheData(req.query);
+      console.log(cacheKey);
 
       const findCacheCustomerData = await redisClient.get(cacheKey);
+
+      // console.log(JSON.parse(findCacheCustomerData));
+
       if (findCacheCustomerData) {
         return res.json(JSON.parse(findCacheCustomerData));
       }
@@ -73,6 +77,7 @@ customerRouter.get(
           email: "text",
           mobile_number: "text",
         });
+
         query.$or = [
           { name_of_customer: { $regex: search, $options: "i" } },
           { email: { $regex: search, $options: "i" } },
@@ -113,13 +118,13 @@ customerRouter.get(
       const customerResponses = {
         status: "success",
         metadata: {
-          total,
+          totalCustomers: total,
           page,
           limit,
           totalPages,
           hasNextPage,
           hasPrevPage,
-          totalCustomers: customers.length,
+          singlePageCustomer: customers.length,
         },
         data: customers,
         query: {
