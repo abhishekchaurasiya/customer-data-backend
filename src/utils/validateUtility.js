@@ -18,6 +18,30 @@ export const validateQueryParams = (req, res, next) => {
     );
   }
 
+  const validateMobile = (value) => {
+    const pattern =
+      /^(?:\+\d{1,3}[-.\s]?)?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{4}$/;
+    if (filterField === "mobile_number" && !pattern.test(value)) return false;
+    return true;
+  };
+
+  if (filterField === "mobile_number" && !validateMobile(filterValue)) {
+    return next(
+      new ErrorHandler(`Invalid filter value for ${filterField} field`, 400)
+    );
+  }
+
+  const validateValue = (value) => {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (filterField === "email" && !pattern.test(value)) return false;
+    return true;
+  };
+
+  if (filterField && !validateValue(filterValue)) {
+    return next(
+      new ErrorHandler("Invalid filter value for specified field", 400)
+    );
+  }
   next();
 };
 
