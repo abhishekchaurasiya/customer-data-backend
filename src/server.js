@@ -4,6 +4,8 @@ import morgan from "morgan";
 import configVariable from "./config/config.js";
 import customerRouter from "./customerRoutes.js";
 import { globalErrorHandler } from "./errorHandler.js";
+import getCollection from "./config/database.js";
+import redisClient from "./config/redis.js";
 
 const app = express();
 
@@ -26,6 +28,8 @@ app.use("/api", customerRouter);
 app.use(globalErrorHandler);
 
 const start = async () => {
+  // await getCollection();
+
   try {
     await app.listen(configVariable.port, () => {
       console.log(`Server is running on port ${configVariable.port}`);
