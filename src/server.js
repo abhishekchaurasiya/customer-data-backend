@@ -4,8 +4,6 @@ import morgan from "morgan";
 import configVariable from "./config/config.js";
 import customerRouter from "./customerRoutes.js";
 import { globalErrorHandler } from "./errorHandler.js";
-import getCollection from "./config/database.js";
-import redisClient from "./config/redis.js";
 
 const app = express();
 
@@ -19,7 +17,7 @@ app.use(
     allowedHeaders: ["Origin", "Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     preflightContinue: false,
-    optionsSuccessStatus: 204, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    optionsSuccessStatus: 204,
   })
 );
 
