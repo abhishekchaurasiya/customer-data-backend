@@ -4,6 +4,7 @@ import morgan from "morgan";
 import configVariable from "./config/config.js";
 import customerRouter from "./customerRoutes.js";
 import { globalErrorHandler } from "./errorHandler.js";
+import "dotenv/config";
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
     allowedHeaders: ["Origin", "Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],
