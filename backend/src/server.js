@@ -1,17 +1,15 @@
 import express from "express";
 import cors from "cors";
-// import connectDatabase from "./config/database.js";
+import morgan from "morgan";
 import configVariable from "./config/config.js";
 import customerRouter from "./customerRoutes.js";
-import errorHandler from "./errorHandler.js";
-
-// Connect to MongoDB
-// const client = new MongoClient(configVariable.databaseUrl);
+import { globalErrorHandler } from "./errorHandler.js";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: ["http://localhost:5173"],
@@ -25,11 +23,9 @@ app.use(
 
 app.use("/api", customerRouter);
 
-app.use(errorHandler);
+app.use(globalErrorHandler);
 
 const start = async () => {
-  //   await connectDatabase();
-
   try {
     await app.listen(configVariable.port, () => {
       console.log(`Server is running on port ${configVariable.port}`);
