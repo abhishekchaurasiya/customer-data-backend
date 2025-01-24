@@ -1,19 +1,3 @@
-Usage:
-// Basic search with sorting
-GET /customers?search=john&sortField=created_at&sortOrder=desc
-
-// Date range filter
-GET /customers?startDate=2024-01-01&endDate=2024-01-31
-
-// Age range filter
-GET /customers?ageRange=25-35
-
-// Mobile prefix filter
-GET /customers?mobilePrefix=91
-
-// Combined filters with pagination and sorting
-GET /customers?page=1&limit=20&search=john&sortField=created_at&sortOrder=desc&ageRange=25-35
-
 # Customer Data Management System
 
 ## Project Overview
