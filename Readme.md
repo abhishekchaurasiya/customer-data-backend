@@ -1,113 +1,173 @@
-This project involves building a MERN stack application for managing customer data. The application must handle a dataset of 2 million customer records, provide efficient querying capabilities, and offer a user-friendly frontend with search and filtering functionality.
+Usage:
+// Basic search with sorting
+GET /customers?search=john&sortField=created_at&sortOrder=desc
 
-Instructions
+// Date range filter
+GET /customers?startDate=2024-01-01&endDate=2024-01-31
 
-1. Create MongoDB Collection
-   Collection Name: Customers
+// Age range filter
+GET /customers?ageRange=25-35
 
-   Fields:
-   s_no: Serial number (unique identifier).
-   name_of_customer: Full name of the customer.
-   email: Email address of the customer.
-   mobile_number: Contact number of the customer.
-   dob: Date of birth of the customer.
-   created_at: Timestamp of record creation.
-   modified_at: Timestamp of last modification.
+// Mobile prefix filter
+GET /customers?mobilePrefix=91
 
-   Indexing:
-   Create a compound index on email and mobile_number for better query performance.
+// Combined filters with pagination and sorting
+GET /customers?page=1&limit=20&search=john&sortField=created_at&sortOrder=desc&ageRange=25-35
 
-2. Generate Fake Data
-   Use a library like faker.js to generate 2 million fake customer records.
-   Write a Node.js script to bulk-insert the generated records into the MongoDB Customers collection.
+# Customer Data Management System
 
-3. Backend API
-   API Endpoint:
-   GET /customers: Fetch paginated data with optional search and filter capabilities.
+## Project Overview
 
-   Query Parameters:
-   page: Current page number (default is 1).
-   limit: Number of records per page (default is 10).
-   search: Search term for name_of_customer or email.
-   filterField & filterValue: For dynamic filtering.
+A full-stack MERN application designed to manage and efficiently query a large-scale customer database with 2 million records.
 
-   Features:
-   Implement error handling.
-   Optimize queries using indexes.
+## Key Features
 
-4. Database Indexing
-   Create a compound index on email and mobile_number.
-   Add additional indexes on frequently queried fields if necessary.
+- **Data Generation**: Bulk generation of 2 million customer records
+- **Backend API**: Advanced querying with pagination, search, and filtering
+- **Performance Optimized**: Indexed MongoDB collection, Redis caching
 
-5. Deployment
-   Backend Deployment:
-   The backend APIs deployed are render platforms.
+## Technology Stack
 
-   Database:
-   Use MongoDB Atlas for managing the database.
+- **Backend**: Express.js, Node.js
+- **Database**: MongoDB
+- **Caching**: Redis
+- **Data Generation**: Faker.js
 
-   Deliverables
-   MongoDB Collection:
-   Customers collection with 2 million records and applied indexes.
+## Project Structure
 
-   Backend:
-   Fully functional Express.js-based API.
+```
+customer-data-management/
+│
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   └── utils/
+│   ├── package.json
+│   └── .env
+│   └── .gitignore
+│
+└── README.md
+```
 
-   Project Setup Instructions
-   Prerequisites
-   Node.js
-   Express.js
-   MongoDB
+## Prerequisites
 
-   Package managers: npm or yarn
-   Steps to Run the Project Locally
-   Clone the Repository:
+- Node.js (v16+)
+- MongoDB Atlas account
+- Redis server
+- npm or yarn
 
-   bash
-   Copy
-   Edit
-   git clone <https://github.com/abhishekchaurasiya/customer-data-backend>
-   cd <customer-data-backend>
-   Install Dependencies:
+## Installation
 
-   Backend:
-   bash
-   Copy
-   Edit
-   cd backend
-   npm install
+1. Clone the repository:
 
-   Set Up Environment Variables:
+```bash
+git clone https://github.com/abhishekchaurasiya/customer-data-backend
+cd customer-data-backend
+```
 
-   Create a .env file in the backend folder with the following:
-   env
-   Copy
-   Edit
-   MONGO_URI=<your-mongodb-atlas-uri>
-   PORT=4040
+2. Install backend dependencies:
 
-   Run the Backend:
-   bash
-   Copy
-   Edit
-   cd backend
-   npm run dev
+```bash
+cd backend
+npm install
+```
 
-   Usage:
-   // Basic search with sorting
-   GET /customers?search=john&sortField=created_at&sortOrder=desc
+## Configuration
 
-   // Date range filter
-   GET /customers?startDate=2024-01-01&endDate=2024-01-31
+Create `.env` files in `backend`:
 
-   // Age range filter
-   GET /customers?ageRange=25-35
+### Backend `.env`
 
-   // Mobile prefix filter
-   GET /customers?mobilePrefix=91
+```
+MONGO_URI=your_mongodb_connection_string
+REDIS_URI=your_redis_connection_string
+PORT=4040
+```
 
-   // Combined filters with pagination and sorting
-   GET /customers?page=1&limit=20&search=john&sortField=created_at&sortOrder=desc&ageRange=25-35
+## Data Generation
 
-   Access the Application:
-   Backend: http://localhost:5000
+Generate 2 million customer records:
+
+```bash
+cd backend
+npm run generate-data
+```
+
+## Running the Application
+
+1. Start Backend:
+
+```bash
+cd backend
+npm run dev
+```
+
+## API Endpoints
+
+### GET /customers
+
+Retrieve paginated customer data with advanced filtering:
+
+**Query Parameters**:
+
+- `page`: Page number (default: 1)
+- `limit`: Records per page (default: 10)
+- `search`: Search across name, email
+- `filterField`: Field to filter
+- `filterValue`: Value to filter
+
+**Example Queries**:
+
+- Basic search: `/customers?search=john`
+- Filtered search: `/customers?filterField=mobile_number&filterValue=91`
+
+## Performance Optimization
+
+- MongoDB compound indexing
+- Redis caching
+- Efficient query pagination
+- Compressed API responses
+
+## Deployment
+
+- **Backend**: Render
+- **Database**: MongoDB Atlas
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License.
+
+## Contact
+
+Your Name - youremail@example.com
+
+Project Link: [https://github.com/yourusername/customer-data-management](https://github.com/abhishekchaurasiya/customer-data-backend)
+
+```
+
+## Future Roadmap
+
+- Add authentication
+- Implement data export functionality
+- Create advanced analytics dashboard
+- Enhance real-time filtering capabilities
+```
+
+## Acknowledgments
+
+- [Express.js](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Faker.js](https://fakerjs.dev/)
+
+Access the Application:
+Backend: [https://customer-data-backend-3ifx.onrender.com/api/customers]
