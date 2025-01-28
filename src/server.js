@@ -24,6 +24,12 @@ app.use(
 
 app.use("/api", customerRouter);
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Welcome to the customer datafetch service",
+  });
+});
+
 app.use(globalErrorHandler);
 
 const start = async () => {
