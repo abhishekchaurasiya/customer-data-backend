@@ -9,6 +9,7 @@ const configVariable = {
   redisHost: process.env.REDIS_HOST,
   redisPort: process.env.REDIS_PORT,
   redisPassword: process.env.REDIS_PASSWORD,
+  redisDatabase: process.env.REDIS_DATABASE
 };
 
 export default configVariable;
