@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL.toString(),
+    origin: [configVariable.client_url],
     credentials: true,
     allowedHeaders: ["Origin", "Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],
