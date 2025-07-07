@@ -5,6 +5,7 @@ import configVariable from "./config/config.js";
 import customerRouter from "./customerRoutes.js";
 import { globalErrorHandler } from "./errorHandler.js";
 import "dotenv/config";
+import getCollection from "./config/database.js";
 
 const app = express();
 
