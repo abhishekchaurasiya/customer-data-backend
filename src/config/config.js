@@ -11,6 +11,7 @@ const configVariable = {
   redisPassword: process.env.REDIS_PASSWORD,
   redisDatabase: process.env.REDIS_DATABASE,
   client_url: process.env.FRONTEND_URL,
+  client_web_url: process.env.FRONTEND_WEB_URL,
 };
 
 export default configVariable;
