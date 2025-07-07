@@ -6,6 +6,7 @@ const redisClient = new Redis(
     host: configVariable.redisHost,
     port: configVariable.redisPort,
     password: configVariable.redisPassword,
+    db: configVariable.redisDatabase,
   },
   {
     maxRetriesPerRequest: 3,
